@@ -1,33 +1,19 @@
-// reveal scroll
-const blocks=document.querySelectorAll(".reveal");
+window.addEventListener(
+"scroll",
+()=>{
 
-function reveal(){
-blocks.forEach(block=>{
-const top=block.getBoundingClientRect().top;
-if(top<window.innerHeight-100){
-block.classList.add("visible");
+const y=
+window.scrollY;
+
+document.querySelector(
+".hero-phone"
+).style.transform=`
+
+rotateY(-12deg)
+rotateX(6deg)
+translateY(${y*0.03}px)
+
+`;
+
 }
-});
-}
-
-window.addEventListener("scroll",reveal);
-
-
-// counters
-const counters=document.querySelectorAll(".counter");
-
-counters.forEach(counter=>{
-let start=0;
-let end=counter.dataset.count;
-
-let timer=setInterval(()=>{
-start += Math.ceil(end/100);
-
-if(start>=end){
-start=end;
-clearInterval(timer);
-}
-
-counter.innerText=start;
-},20);
-});
+);
