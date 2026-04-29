@@ -1,33 +1,24 @@
 body{
-background:red !important;
-}
-body{
 margin:0;
 font-family:Arial;
-background:#020202;
+background:#050505;
 color:white;
 overflow-x:hidden;
 }
-
 
 .hero{
 min-height:100vh;
 
 background:
 radial-gradient(circle at 30% 20%,
-rgba(255,0,0,.2),
+rgba(255,0,0,.18),
 transparent 40%),
 
-radial-gradient(circle at 80% 60%,
-rgba(255,40,40,.12),
-transparent 35%),
-
-#020202;
+#050505;
 }
 
-
 nav{
-padding:40px 8%;
+padding:35px 8%;
 
 display:flex;
 justify-content:space-between;
@@ -35,19 +26,18 @@ align-items:center;
 }
 
 .logo{
-font-size:24px;
-font-weight:700;
 color:#ff2d2d;
+font-weight:700;
+font-size:22px;
 }
 
 .nav-btn{
 border:1px solid #ff2d2d;
-padding:14px 24px;
-border-radius:16px;
-color:white;
+padding:14px 22px;
+border-radius:14px;
 text-decoration:none;
+color:white;
 }
-
 
 .hero-content{
 display:flex;
@@ -55,127 +45,119 @@ align-items:center;
 justify-content:space-between;
 
 padding:80px 8%;
-gap:60px;
+
 flex-wrap:wrap;
+gap:60px;
 }
 
-.hero-text{
-max-width:620px;
+.copy{
+max-width:560px;
 }
 
 h1{
-font-size:96px;
+font-size:92px;
 line-height:1;
 margin:0;
 }
 
-.hero-text p{
-font-size:28px;
+.copy p{
+font-size:30px;
 margin:40px 0;
-line-height:1.5;
 }
-
 
 .cta-main{
 background:#ff2d2d;
-padding:22px 42px;
+padding:22px 40px;
 border-radius:18px;
 text-decoration:none;
 color:white;
 display:inline-block;
-font-size:22px;
-}
-
-
-.phone-stage{
-flex:1;
-perspective:1500px;
 }
 
 .hero-phone{
-width:100%;
-
-transform:
-rotateY(-12deg)
-rotateX(6deg);
+width:120%;
+max-width:none;
 
 filter:
 drop-shadow(
-0 80px 120px rgba(255,0,0,.25)
+0 60px 140px rgba(255,0,0,.28)
 );
-
-animation:
-float 7s ease-in-out infinite;
-}
-
-
-@keyframes float{
-
-50%{
-transform:
-rotateY(-12deg)
-rotateX(6deg)
-translateY(-20px);
-}
-
 }
 
 
 
-.sticky-wrap{
-display:flex;
-padding:180px 8%;
-gap:80px;
-flex-wrap:wrap;
-}
-
-.sticky-phone{
-position:sticky;
-top:100px;
-
-flex:1;
-min-width:320px;
-}
-
-.sticky-img{
-width:100%;
-}
-
-.story-panels{
-flex:1;
-min-width:320px;
-}
-
-.panel{
+.step{
 min-height:100vh;
 
 display:flex;
-flex-direction:column;
-justify-content:center;
+align-items:center;
+justify-content:space-between;
+
+padding:0 8%;
+
+gap:70px;
+
+flex-wrap:wrap;
 }
 
-.panel span{
-color:#ff2d2d;
-font-size:20px;
-}
-
-.panel h2{
-font-size:72px;
-margin:20px 0;
-}
-
-.panel p{
-font-size:28px;
+.text{
 max-width:500px;
 }
 
-.panel h3{
-font-size:110px;
+.text span{
 color:#ff2d2d;
+font-size:22px;
+}
+
+.text h2{
+font-size:72px;
+}
+
+.text p{
+font-size:28px;
+}
+
+.visual{
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.ring{
+width:220px;
+height:220px;
+
+border-radius:50%;
+
+border:18px solid #ff2d2d;
+
+font-size:70px;
+font-weight:700;
+}
+
+.stat{
+font-size:140px;
+color:#ff2d2d;
+font-weight:800;
+}
+
+.graph{
+width:520px;
+height:220px;
+
+border-bottom:5px solid #ff2d2d;
+
+background:
+linear-gradient(
+to top,
+transparent 70%,
+rgba(255,0,0,.08)
+);
 }
 
 
-.feature-grid{
+
+.benefits{
 display:grid;
 
 grid-template-columns:
@@ -183,79 +165,48 @@ repeat(auto-fit,minmax(280px,1fr));
 
 gap:35px;
 
-padding:120px 8%;
+padding:100px 8%;
 }
 
-.glass{
-background:
-rgba(255,255,255,.03);
+.card{
+background:#111;
 
-backdrop-filter:blur(20px);
-
-border:
-1px solid rgba(255,0,0,.15);
-
-padding:70px;
+padding:60px;
 
 border-radius:30px;
 
-font-size:28px;
-
-box-shadow:
-0 30px 80px rgba(0,0,0,.5);
+border:1px solid rgba(255,0,0,.12);
 
 transition:.4s;
 }
 
-.glass:hover{
-transform:translateY(-12px);
+.card:hover{
+transform:translateY(-10px);
 }
 
 
 
-.numbers{
-display:flex;
-justify-content:center;
-gap:100px;
-
-padding:160px 0;
-
-font-size:70px;
-
-flex-wrap:wrap;
-}
-
-.numbers span{
-display:block;
-font-size:24px;
-margin-top:20px;
-opacity:.7;
-}
-
-
-.mega-cta{
+.cta{
 text-align:center;
-padding:240px 20px;
+padding:220px 20px;
 }
 
-.mega-cta h2{
-font-size:90px;
-max-width:900px;
-margin:auto;
+.cta h2{
+font-size:72px;
 }
 
 .coach-btn{
-margin-top:60px;
-
 display:inline-block;
+
+margin-top:50px;
 
 background:#ff2d2d;
 
 padding:30px 60px;
 
-border-radius:24px;
+border-radius:22px;
 
-font-size:36px;
+font-size:34px;
 
 text-decoration:none;
 color:white;
@@ -265,30 +216,27 @@ color:white;
 @media(max-width:900px){
 
 h1{
-font-size:58px;
+font-size:56px;
 }
 
-.hero-text p{
-font-size:22px;
-}
-
-.panel h2{
+.text h2{
 font-size:46px;
 }
 
-.panel p{
+.text p{
 font-size:22px;
 }
 
-.panel h3{
-font-size:70px;
+.stat{
+font-size:80px;
 }
 
-.mega-cta h2{
+.graph{
+width:100%;
+}
+
+.cta h2{
 font-size:46px;
 }
 
-.coach-btn{
-font-size:24px;
-}
 }
