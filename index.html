@@ -2,910 +2,1117 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EVRYØNE — Transforme ton corps</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#080808">
+<title>EVRYØNE — Mesure ta discipline. Vois ton niveau réel.</title>
+<meta name="description" content="EVRYØNE transforme chaque journée en score /100. Entraînement, nutrition, récupération, progression — un seul système pour mesurer ta discipline, pas juste tes actions.">
+<link rel="canonical" href="https://app.evryoneclub.com/">
+<meta property="og:title" content="EVRYØNE — Mesure ta discipline. Vois ton niveau réel.">
+<meta property="og:description" content="Un score /100 chaque jour. Training, nutrition, récup, progression. Le système de discipline complet.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://app.evryoneclub.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,400;1,700;1,900&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --red: #ff3333;
-  --red-dim: rgba(255,51,51,0.18);
-  --red-glow: rgba(255,51,51,0.4);
-  --bg: #080808;
-  --bg2: #0f0f0f;
-  --card: rgba(16,16,16,0.95);
-  --border: rgba(255,255,255,0.07);
-  --text: #ffffff;
-  --muted: #666666;
-  --muted2: #999999;
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#080808;
+  --bg2:#0d0d0d;
+  --bg3:#111;
+  --card:#141414;
+  --card2:#1a1a1a;
+  --line:rgba(255,255,255,0.06);
+  --line2:rgba(255,255,255,0.1);
+  --red:#ff2d2d;
+  --red2:#ff6830;
+  --gold:#f5c842;
+  --white:#efefef;
+  --muted:#444;
+  --muted2:#7a7a7a;
+  --muted3:#a8a8a8;
+  color-scheme:dark;
 }
-html { scroll-behavior: smooth; background: var(--bg); }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'DM Sans', sans-serif;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+html{scroll-behavior:smooth;background:var(--bg);-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--white);
+  font-family:'Outfit',sans-serif;
+  font-weight:400;
+  overflow-x:hidden;position:relative;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
 }
-
-/* ── GRAIN ── */
-body::after {
-  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
-  opacity: 0.55; mix-blend-mode: overlay;
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%,rgba(255,45,45,0.13) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 40% at 100% 80%,rgba(255,104,48,0.06) 0%,transparent 50%),
+    radial-gradient(ellipse 30% 30% at 0% 40%,rgba(255,45,45,0.04) 0%,transparent 50%);
 }
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:1;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:0.7;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 
 /* ── NAV ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 24px; height: 64px;
-  background: rgba(8,8,8,0.85);
-  backdrop-filter: blur(24px) saturate(180%);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;
+  background:rgba(8,8,8,0.7);
+  backdrop-filter:blur(32px) saturate(1.5);
+  -webkit-backdrop-filter:blur(32px) saturate(1.5);
+  border-bottom:1px solid var(--line);
 }
-.logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 24px; letter-spacing: 6px; color: var(--text);
-  display: flex; align-items: center; gap: 1px;
+.logo{
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-size:17px;letter-spacing:4px;color:var(--white);
+  display:flex;align-items:center;gap:8px;
 }
-.logo-o {
-  display: inline-flex; width: 19px; height: 19px;
-  background: var(--red); border-radius: 50%;
-  align-items: center; justify-content: center;
-  box-shadow: 0 0 16px var(--red-glow);
-  position: relative; top: 1px;
+.logo em{font-style:italic;color:var(--red);font-weight:900}
+.logo-dot{width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);animation:pulse 2.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.2)}}
+.nav-pill{
+  background:linear-gradient(135deg,var(--red),var(--red2));
+  color:#fff;padding:9px 18px;border-radius:100px;
+  font-size:11px;font-weight:700;letter-spacing:0.5px;
+  box-shadow:0 4px 20px rgba(255,45,45,0.35),inset 0 1px 0 rgba(255,255,255,0.15);
+  transition:transform 0.2s,box-shadow 0.2s;
 }
-.nav-links { display: flex; align-items: center; gap: 28px; }
-.nav-link {
-  font-size: 12px; font-weight: 500; color: var(--muted);
-  text-decoration: none; letter-spacing: .5px;
-  transition: color .2s;
-}
-.nav-link:hover { color: var(--text); }
-.nav-cta {
-  background: var(--red); color: #fff;
-  padding: 10px 22px; border-radius: 8px;
-  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
-  text-transform: uppercase; text-decoration: none;
-  box-shadow: 0 4px 20px var(--red-glow);
-  transition: transform .2s, box-shadow .2s;
-}
-.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 28px var(--red-glow); }
+.nav-pill:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(255,45,45,0.5),inset 0 1px 0 rgba(255,255,255,0.15)}
 
 /* ── HERO ── */
-#hero {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  padding: 80px 60px 60px;
-  gap: 60px;
-  position: relative;
-  overflow: hidden;
+#hero{
+  position:relative;z-index:2;
+  min-height:100svh;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  padding:0 24px 70px;
+  overflow:hidden;
 }
-@media (max-width: 768px) {
-  #hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 40px; }
-  .hero-visual { display: none; }
-  nav { padding: 0 16px; }
-  .nav-links { display: none; }
-  #hero { padding: 90px 20px 60px; }
+.hero-spotlight{
+  position:absolute;top:-20%;left:50%;transform:translateX(-50%);
+  width:200%;height:80%;
+  background:conic-gradient(from 200deg at 50% 0%,transparent 20%,rgba(255,45,45,0.08) 35%,rgba(255,104,48,0.05) 50%,transparent 65%);
+  animation:spotlight 9s ease-in-out infinite;pointer-events:none;
+}
+@keyframes spotlight{0%,100%{opacity:0.7;transform:translateX(-50%) rotate(-3deg)}50%{opacity:1;transform:translateX(-50%) rotate(3deg)}}
+
+.hero-bg-word{
+  position:absolute;bottom:-30px;right:-15px;
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-style:italic;
+  font-size:clamp(160px,42vw,260px);line-height:0.85;
+  color:rgba(255,45,45,0.04);
+  pointer-events:none;user-select:none;letter-spacing:-8px;
 }
 
-/* Hero background */
-.hero-bg {
-  position: absolute; inset: 0; pointer-events: none;
-  background:
-    radial-gradient(ellipse 80% 60% at 30% 0%, rgba(255,51,51,0.22) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 50% at 80% 80%, rgba(255,51,51,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 30% 40% at 5% 80%, rgba(255,51,51,0.06) 0%, transparent 60%);
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-bottom:22px;align-self:flex-start;
+  font-family:'DM Mono',monospace;
+  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(255,45,45,0.85);
+  background:rgba(255,45,45,0.05);border:1px solid rgba(255,45,45,0.15);
+  padding:7px 12px;border-radius:100px;
+  opacity:0;animation:fadeUp 0.7s 0.2s forwards;
 }
-/* Diagonal grid */
-.hero-grid {
-  position: absolute; inset: 0; pointer-events: none;
-  background-image:
-    linear-gradient(rgba(255,51,51,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,51,51,0.035) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse at 30% 40%, transparent 20%, black 75%);
+.eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--red);animation:blink 2s infinite;box-shadow:0 0 8px var(--red)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+
+h1{
+  font-family:'Playfair Display',serif;
+  font-weight:900;
+  font-size:clamp(54px,15.5vw,82px);
+  line-height:0.88;letter-spacing:-2px;
+  margin-bottom:24px;
+  opacity:0;animation:fadeUp 0.8s 0.4s forwards;
+}
+h1 .l1{display:block;color:var(--white)}
+h1 .l2{display:block;font-style:italic;color:var(--red)}
+h1 .l2-sub{display:inline-block;font-size:0.55em;font-style:italic;color:var(--muted3);font-weight:400;font-family:'Outfit',sans-serif;letter-spacing:0;margin-left:4px;vertical-align:middle}
+
+.hero-sub{
+  font-size:15px;line-height:1.65;
+  color:var(--muted3);font-weight:300;
+  max-width:340px;margin-bottom:14px;
+  opacity:0;animation:fadeUp 0.7s 0.6s forwards;
+}
+.hero-sub strong{color:var(--white);font-weight:600}
+.hero-sub em{color:var(--red);font-style:normal;font-weight:500}
+
+.hero-claim{
+  font-family:'DM Mono',monospace;
+  font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--muted2);margin-bottom:30px;
+  opacity:0;animation:fadeUp 0.6s 0.75s forwards;
 }
 
-/* Hero left */
-.hero-content { position: relative; z-index: 1; }
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(255,51,51,0.1);
-  border: 1px solid rgba(255,51,51,0.28);
-  padding: 6px 14px; border-radius: 100px;
-  font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
-  color: #ff7a7a; margin-bottom: 24px;
+.hero-btns{
+  display:flex;flex-direction:column;gap:10px;
+  opacity:0;animation:fadeUp 0.7s 0.9s forwards;
 }
-.badge-dot {
-  width: 6px; height: 6px; border-radius: 50%; background: var(--red);
-  box-shadow: 0 0 8px var(--red-glow);
-  animation: blink 2s ease-in-out infinite;
+.btn-hero{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  background:linear-gradient(135deg,var(--red),var(--red2));
+  color:#fff;padding:18px 24px;border-radius:14px;
+  font-size:15px;font-weight:700;
+  box-shadow:0 12px 40px rgba(255,45,45,0.4),inset 0 1px 0 rgba(255,255,255,0.15);
+  position:relative;overflow:hidden;
+  transition:transform 0.2s;
 }
-@keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+.btn-hero:hover{transform:translateY(-2px)}
+.btn-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,255,255,0.1),transparent);pointer-events:none}
+.btn-ghost{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  border:1px solid var(--line2);
+  color:var(--muted3);padding:16px 24px;border-radius:14px;
+  font-size:13px;font-weight:500;
+  transition:border-color 0.2s,color 0.2s;
+}
+.btn-ghost:hover{border-color:rgba(255,45,45,0.3);color:var(--white)}
 
-.hero-h1 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(56px, 7vw, 92px);
-  line-height: .88; letter-spacing: 1px;
-  margin-bottom: 24px;
+.hero-trust{
+  display:flex;align-items:center;gap:14px;margin-top:22px;
+  opacity:0;animation:fadeUp 0.6s 1.1s forwards;
 }
-.h1-dim { color: rgba(255,255,255,0.12); }
-.h1-white { color: #fff; }
-.h1-red { color: var(--red); text-shadow: 0 0 60px rgba(255,51,51,0.5); }
+.trust-stars{display:flex;gap:1px;color:var(--gold);font-size:13px;letter-spacing:1px}
+.trust-text{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--muted2);text-transform:uppercase}
+.trust-text strong{color:var(--white);font-weight:600}
 
-.hero-desc {
-  font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.45);
-  font-weight: 300; max-width: 380px; margin-bottom: 36px;
+.scroll-hint{
+  position:absolute;bottom:18px;right:24px;
+  display:flex;align-items:center;gap:8px;
+  font-family:'DM Mono',monospace;
+  font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);
+  opacity:0;animation:fadeUp 0.6s 1.4s forwards;
 }
-.hero-desc strong { color: rgba(255,255,255,0.75); font-weight: 500; }
+.scroll-orb{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center}
+.scroll-dot{width:3px;height:3px;background:var(--muted2);border-radius:50%;animation:scr 2s ease-in-out infinite}
+@keyframes scr{0%,100%{transform:translateY(-3px);opacity:0.3}50%{transform:translateY(3px);opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-.hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-.btn-primary {
-  display: inline-flex; align-items: center; gap: 12px;
-  background: var(--red); color: #fff;
-  padding: 16px 28px; border-radius: 10px;
-  font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-  text-decoration: none; cursor: pointer; border: none; font-family: inherit;
-  box-shadow: 0 8px 32px rgba(255,51,51,0.45);
-  position: relative; overflow: hidden;
-  transition: transform .2s, box-shadow .2s;
-}
-.btn-primary::before {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent);
-}
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,51,51,0.6); }
-.btn-primary-arrow {
-  width: 30px; height: 30px; background: rgba(255,255,255,0.18);
-  border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-size: 15px;
-}
-.btn-ghost {
-  display: inline-flex; align-items: center; gap: 8px;
-  color: var(--muted2); text-decoration: none;
-  font-size: 13px; font-weight: 500;
-  border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 2px;
-  transition: color .2s, border-color .2s;
-}
-.btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.3); }
+/* ── TICKER ── */
+.ticker{position:relative;z-index:2;background:var(--red);padding:12px 0;overflow:hidden;border-top:1px solid rgba(0,0,0,0.2);border-bottom:1px solid rgba(0,0,0,0.2)}
+.ticker-track{display:flex;white-space:nowrap;animation:ticker 28s linear infinite;width:max-content}
+.ticker-item{display:inline-flex;align-items:center;gap:10px;padding:0 22px;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.95);flex-shrink:0}
+.ticker-sep{color:rgba(255,255,255,0.4);font-size:14px}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-.hero-trust {
-  display: flex; align-items: center; gap: 20px;
-  margin-top: 32px; padding-top: 28px;
-  border-top: 1px solid rgba(255,255,255,0.07);
+/* ── PROBLEM ── */
+.prob-sec{
+  position:relative;z-index:2;
+  padding:80px 24px;
+  background:var(--bg2);
+  border-bottom:1px solid var(--line);
 }
-.trust-item { font-size: 11px; color: var(--muted); }
-.trust-item strong { color: var(--text); font-weight: 600; display: block; font-size: 15px; }
-
-/* Hero right — phone mockup */
-.hero-visual {
-  position: relative; z-index: 1;
-  display: flex; align-items: center; justify-content: center;
-  overflow: visible;
+.prob-kicker{
+  font-family:'DM Mono',monospace;
+  font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--muted2);margin-bottom:28px;
+  display:flex;align-items:center;gap:10px;
 }
-.phone-wrap {
-  position: relative;
-  width: 280px; height: 580px;
-  overflow: visible;
+.prob-kicker::before{content:'';width:14px;height:1px;background:var(--muted2)}
+.prob-lines{display:flex;flex-direction:column;gap:0}
+.prob-line{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,7.5vw,42px);
+  font-weight:900;line-height:1.05;
+  color:rgba(255,255,255,0.12);
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+  opacity:0;transform:translateX(-16px);
+  transition:opacity 0.5s,transform 0.5s,color 0.5s;
 }
-.phone-glow {
-  position: absolute; inset: -40px;
-  background: radial-gradient(ellipse, rgba(255,51,51,0.2) 0%, transparent 70%);
-  pointer-events: none;
+.prob-line:last-child{border-bottom:none}
+.prob-line.on{opacity:1;transform:none;color:rgba(255,255,255,0.92)}
+.prob-line em{font-style:italic;color:var(--red)}
+.prob-answer{
+  margin-top:36px;padding:22px;
+  background:rgba(255,45,45,0.05);
+  border:1px solid rgba(255,45,45,0.15);
+  border-radius:16px;
+  font-size:14px;line-height:1.75;color:var(--muted3);
+  opacity:0;transform:translateY(12px);
+  transition:opacity 0.6s,transform 0.6s;
 }
-.phone-frame {
-  width: 100%; height: 100%;
-  background: #111; border-radius: 36px;
-  border: 1px solid rgba(255,255,255,0.12);
-  overflow: hidden;
-  box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.06), inset 0 0 0 1px rgba(255,255,255,0.04);
-  position: relative;
-}
-/* Phone notch */
-.phone-notch {
-  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-  width: 80px; height: 24px; background: #111; border-radius: 0 0 16px 16px; z-index: 10;
-}
-/* Phone screen content */
-.phone-screen {
-  width: 100%; height: 100%;
-  background: #0a0a0a;
-  display: flex; flex-direction: column;
-  overflow: hidden; font-size: 10px;
-}
-.ps-header {
-  padding: 30px 14px 8px;
-  display: flex; align-items: center; justify-content: space-between;
-  flex-shrink: 0;
-}
-.ps-logo { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 1.5px; color: #fff; }
-.ps-logo span { color: var(--red); }
-.ps-avatar {
-  width: 24px; height: 24px; border-radius: 50%;
-  background: var(--red); display: flex; align-items: center; justify-content: center;
-  font-family: 'Bebas Neue', sans-serif; font-size: 11px; color: #fff;
-}
-.ps-body { flex: 1; padding: 4px 14px 80px; overflow: hidden; }
-/* Score ring mini */
-.ps-score-card {
-  background: rgba(18,18,18,0.95); border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 12px; padding: 12px; margin-bottom: 8px;
-  display: flex; align-items: center; gap: 12px;
-}
-.ps-ring { position: relative; width: 64px; height: 64px; flex-shrink: 0; }
-.ps-ring svg { transform: rotate(-90deg); }
-.ps-ring-val {
-  position: absolute; inset: 0; display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #fff; line-height: 1;
-}
-.ps-ring-sub { font-size: 7px; color: #555; }
-.ps-score-rows { flex: 1; display: flex; flex-direction: column; gap: 5px; }
-.ps-score-row { display: flex; align-items: center; justify-content: space-between; }
-.ps-score-label { font-size: 8px; color: #888; display: flex; align-items: center; gap: 4px; }
-.ps-dot { width: 5px; height: 5px; border-radius: 50%; }
-.ps-score-pts { font-size: 8px; font-weight: 700; color: #fff; }
-/* Mini bar */
-.ps-bar { background: #222; border-radius: 99px; height: 3px; overflow: hidden; }
-.ps-bar-fill { height: 3px; border-radius: 99px; }
-/* Grid stats */
-.ps-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px; }
-.ps-stat {
-  background: rgba(18,18,18,0.95); border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 10px; padding: 10px;
-}
-.ps-stat-lbl { font-size: 7px; color: #555; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-.ps-stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: #fff; line-height: 1; }
-.ps-stat-sub { font-size: 7px; color: #555; margin-top: 2px; }
-/* Next session card */
-.ps-session {
-  background: rgba(18,18,18,0.95); border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 10px; padding: 10px; position: relative; overflow: hidden;
-}
-.ps-session-bg {
-  position: absolute; right: 0; top: 0; bottom: 0; width: 50%;
-  background: linear-gradient(to left, rgba(255,51,51,0.08), transparent);
-}
-.ps-session-label { font-size: 7px; color: #555; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-.ps-session-name { font-family: 'Bebas Neue', sans-serif; font-size: 14px; color: var(--red); letter-spacing: 1px; margin-bottom: 3px; }
-.ps-session-info { font-size: 8px; color: #666; }
-/* Phone bottom nav */
-.ps-nav {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  background: rgba(14,14,14,0.95);
-  border-top: 1px solid rgba(255,255,255,0.08);
-  display: flex; align-items: center; justify-content: space-around;
-  padding: 8px 4px 12px; height: 52px;
-}
-.ps-nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
-.ps-nav-icon { width: 16px; height: 16px; }
-.ps-nav-label { font-size: 6px; font-weight: 600; color: #444; }
-.ps-nav-item.active .ps-nav-label { color: var(--red); }
-.ps-nav-item.active .ps-nav-icon path,
-.ps-nav-item.active .ps-nav-icon polyline,
-.ps-nav-item.active .ps-nav-icon line { stroke: var(--red) !important; }
-
-/* Floating badges */
-.badge-float {
-  position: absolute;
-  background: rgba(14,14,14,0.95);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 12px; padding: 10px 14px;
-  box-shadow: 0 16px 40px rgba(0,0,0,0.6);
-  white-space: nowrap;
-}
-.bf-left { left: -80px; top: 100px; animation: float-l 4s ease-in-out infinite; }
-.bf-right { right: -70px; bottom: 120px; animation: float-r 3.5s 1s ease-in-out infinite; }
-@keyframes float-l { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-@keyframes float-r { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
-.bf-label { font-size: 8px; color: #555; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-.bf-val { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #fff; line-height: 1; }
-.bf-sub { font-size: 8px; color: #888; margin-top: 2px; }
-.bf-streak { color: var(--red); }
-
-/* ── MARQUEE ── */
-.marquee-wrap {
-  border-top: 1px solid rgba(255,51,51,0.12);
-  border-bottom: 1px solid rgba(255,51,51,0.12);
-  background: rgba(255,51,51,0.05);
-  overflow: hidden; padding: 12px 0;
-}
-.marquee-track {
-  display: flex; gap: 0; white-space: nowrap;
-  animation: marquee 20s linear infinite;
-}
-.marquee-item {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 0 28px; font-size: 10px; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--muted); flex-shrink: 0;
-}
-.marquee-item strong { color: var(--red); }
-.marquee-sep { color: rgba(255,51,51,0.25); }
-@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-/* ── STATS ── */
-.stats-section {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-@media(max-width:768px){ .stats-section{ grid-template-columns: 1fr 1fr; } }
-.stat-item {
-  padding: 40px 24px; text-align: center;
-  border-right: 1px solid var(--border);
-  position: relative; overflow: hidden;
-}
-.stat-item:last-child { border-right: none; }
-.stat-item::before {
-  content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-  width: 60%; height: 1px; background: linear-gradient(90deg, transparent, var(--red), transparent);
-  opacity: 0;
-  transition: opacity .4s;
-}
-.stat-item:hover::before { opacity: 1; }
-.stat-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 56px; line-height: 1; color: #fff; display: block;
-}
-.stat-num .stat-accent { color: var(--red); }
-.stat-lbl {
-  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
-  color: var(--muted); margin-top: 6px; display: block;
-}
+.prob-answer.on{opacity:1;transform:none}
+.prob-answer strong{color:var(--white);font-weight:600}
+.prob-answer em{color:var(--red);font-style:normal;font-weight:600}
 
 /* ── SECTIONS ── */
-.section { padding: 96px 60px; }
-.section-dark { background: var(--bg2); }
-@media(max-width:768px){ .section { padding: 64px 20px; } }
-.section-tag {
-  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--red); margin-bottom: 12px;
-  display: flex; align-items: center; gap: 12px;
+.sec{padding:80px 24px;position:relative;z-index:2}
+.sec-alt{background:var(--bg2)}
+.sec-kicker{
+  font-family:'DM Mono',monospace;
+  font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--red);margin-bottom:10px;
+  display:flex;align-items:center;gap:10px;
 }
-.section-tag::before { content: ''; width: 24px; height: 1px; background: var(--red); }
-.section-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(40px, 6vw, 64px);
-  line-height: .95; letter-spacing: 1px; margin-bottom: 16px;
+.sec-kicker::before{content:'';width:14px;height:1px;background:var(--red)}
+.sec-h{
+  font-family:'Playfair Display',serif;
+  font-weight:900;
+  font-size:clamp(36px,9.5vw,54px);
+  line-height:0.95;color:var(--white);letter-spacing:-1px;
 }
-.section-title span { color: var(--red); }
-.section-sub { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.7; font-weight: 300; max-width: 480px; margin-bottom: 48px; }
+.sec-h em{font-style:italic;color:var(--red)}
+.sec-sub{font-size:13.5px;color:var(--muted3);line-height:1.7;font-weight:300;margin-top:12px;max-width:400px}
 
-/* ── FEATURES GRID ── */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-top: 48px;
-}
-@media(max-width:900px){ .features-grid{ grid-template-columns: 1fr 1fr; } }
-@media(max-width:600px){ .features-grid{ grid-template-columns: 1fr; } }
-.feature-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px; padding: 24px;
-  position: relative; overflow: hidden;
-  transition: border-color .3s, transform .3s;
-  cursor: default;
-}
-.feature-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,51,51,0.4), transparent);
-  opacity: 0; transition: opacity .3s;
-}
-.feature-card:hover { border-color: rgba(255,51,51,0.25); transform: translateY(-2px); }
-.feature-card:hover::before { opacity: 1; }
-.feature-card.featured {
-  grid-column: span 2;
-  background: linear-gradient(145deg, rgba(255,51,51,0.08), rgba(255,51,51,0.02), transparent);
-  border-color: rgba(255,51,51,0.2);
-}
-@media(max-width:900px){ .feature-card.featured{ grid-column: span 1; } }
-.feature-icon {
-  width: 48px; height: 48px; border-radius: 12px;
-  background: rgba(255,51,51,0.1);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px; margin-bottom: 16px;
-}
-.feature-name { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
-.feature-desc { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.7; font-weight: 300; }
+.rv{opacity:0;transform:translateY(24px);transition:opacity 0.65s,transform 0.65s}
+.rv.on{opacity:1;transform:none}
 
-/* ── HOW IT WORKS ── */
-.steps-layout {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 80px; align-items: start; margin-top: 48px;
+/* ── PILLARS ── */
+.pillars{display:flex;flex-direction:column;gap:1px;margin-top:36px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:rgba(255,255,255,0.03)}
+.pillar{
+  background:var(--card);padding:22px 20px;
+  display:flex;gap:16px;align-items:flex-start;
+  opacity:0;transform:translateY(10px);
+  transition:opacity 0.45s,transform 0.45s,background 0.3s;
+  position:relative;overflow:hidden;
 }
-@media(max-width:768px){ .steps-layout{ grid-template-columns:1fr; gap:40px; } }
-.steps-list { display: flex; flex-direction: column; gap: 0; position: relative; }
-.steps-list::before {
-  content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 1px;
-  background: linear-gradient(to bottom, var(--red), rgba(255,51,51,0.05));
+.pillar::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:linear-gradient(to bottom,var(--red),var(--red2));
+  transform:scaleY(0);transform-origin:bottom;transition:transform 0.5s;
 }
-.step-item {
-  display: grid; grid-template-columns: 42px 1fr;
-  gap: 20px; padding: 24px 0;
-  border-bottom: 1px solid var(--border);
+.pillar.on{opacity:1;transform:none}
+.pillar.on::before{transform:scaleY(1)}
+.pillar:hover{background:#171717}
+.pillar-icon{
+  width:46px;height:46px;flex-shrink:0;
+  background:rgba(255,45,45,0.08);border-radius:12px;
+  border:1px solid rgba(255,45,45,0.18);
+  display:flex;align-items:center;justify-content:center;font-size:20px;
 }
-.step-item:last-child { border-bottom: none; }
-.step-num {
-  width: 42px; height: 42px; border-radius: 50%;
-  background: rgba(255,51,51,0.08);
-  border: 1px solid rgba(255,51,51,0.25);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--red);
-  position: relative; z-index: 1; flex-shrink: 0;
+.pillar-body{flex:1;min-width:0}
+.pillar-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;gap:8px}
+.pillar-name{font-size:15.5px;font-weight:700}
+.pillar-diff{
+  font-family:'DM Mono',monospace;
+  font-size:8px;letter-spacing:1px;text-transform:uppercase;
+  color:var(--red);background:rgba(255,45,45,0.08);
+  border:1px solid rgba(255,45,45,0.15);
+  padding:3px 8px;border-radius:100px;flex-shrink:0;
 }
-.step-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; padding-top: 8px; }
-.step-desc { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.7; font-weight: 300; }
-.step-pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  margin-top: 10px; background: rgba(255,51,51,0.08);
-  border: 1px solid rgba(255,51,51,0.18); color: #ff7a7a;
-  font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
-  padding: 4px 12px; border-radius: 100px;
-}
+.pillar-desc{font-size:12.5px;color:var(--muted3);line-height:1.6;font-weight:300}
+.pillar-vs{margin-top:12px;display:flex;flex-direction:column;gap:5px}
+.vs-row{font-size:11px;display:flex;gap:8px;align-items:flex-start}
+.vs-icon{flex-shrink:0;font-size:10px;margin-top:1px}
+.vs-no{color:var(--muted2)}
+.vs-no .vs-icon{color:#5a5a5a}
+.vs-yes{color:rgba(255,150,150,0.95);font-weight:500}
+.vs-yes .vs-icon{color:var(--red)}
 
-/* Steps visual — before/after comparison */
-.ba-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 20px; overflow: hidden;
+/* ── SCORE FOCUS ── */
+.score-focus{position:relative;z-index:2;padding:80px 24px;overflow:hidden}
+.score-big{
+  position:relative;margin-top:36px;
+  background:linear-gradient(145deg,#1a0808,#110808,#0e0808);
+  border:1px solid rgba(255,45,45,0.18);
+  border-radius:24px;padding:32px 24px;
+  overflow:hidden;
+  box-shadow:0 32px 80px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.04);
 }
-.ba-header {
-  padding: 20px 24px; border-bottom: 1px solid var(--border);
-  font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1px;
-  color: var(--muted);
+.score-big::before{
+  content:'';position:absolute;
+  top:-60px;left:50%;transform:translateX(-50%);
+  width:280px;height:220px;
+  background:radial-gradient(ellipse,rgba(255,45,45,0.22),transparent 70%);
+  pointer-events:none;
 }
-.ba-cols { display: grid; grid-template-columns: 1fr 1fr; }
-.ba-col { padding: 20px; }
-.ba-col-b { border-right: 1px solid var(--border); }
-.ba-col-label {
-  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
-  display: flex; align-items: center; gap: 6px; margin-bottom: 16px;
+.score-bg-num{
+  position:absolute;bottom:-40px;right:-15px;
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-style:italic;
+  font-size:200px;color:rgba(255,45,45,0.05);
+  line-height:1;pointer-events:none;
 }
-.ba-col-dot { width: 6px; height: 6px; border-radius: 50%; }
-.ba-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.ba-list li {
-  font-size: 11px; padding-left: 16px; position: relative;
-  line-height: 1.5; font-weight: 300;
+.score-label{
+  font-family:'DM Mono',monospace;
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted2);margin-bottom:8px;
+  position:relative;z-index:1;
 }
-.ba-list li::before { content: '—'; position: absolute; left: 0; color: #444; font-size: 9px; top: 1px; }
-.ba-list.after li { color: #fff; }
-.ba-list.before li { color: rgba(255,255,255,0.3); }
-.ba-list.after li::before { content: '✓'; color: var(--red); }
+.score-greeting{
+  font-family:'Playfair Display',serif;
+  font-style:italic;font-size:26px;
+  color:var(--red);margin-bottom:22px;
+  position:relative;z-index:1;
+}
+.score-main{
+  display:flex;align-items:flex-end;gap:14px;
+  position:relative;z-index:1;margin-bottom:24px;
+}
+.score-number{font-size:92px;font-weight:800;line-height:1;color:var(--white);letter-spacing:-3px}
+.score-slash{font-size:34px;color:var(--muted2);margin-bottom:12px}
+.score-total{font-size:34px;color:var(--muted2);margin-bottom:12px}
+.score-meta{display:flex;flex-direction:column;gap:4px;margin-bottom:8px;margin-left:auto}
+.score-up{font-size:13px;color:var(--red);font-weight:600;display:flex;align-items:center;gap:4px}
+.score-day{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:1px;text-transform:uppercase}
 
-/* ── CTA ── */
-.cta-section {
-  padding: 80px 60px 96px;
-  position: relative; overflow: hidden;
+.score-bars{position:relative;z-index:1}
+.sb{margin-bottom:11px}
+.sb:last-child{margin-bottom:0}
+.sb-head{display:flex;justify-content:space-between;font-size:10.5px;margin-bottom:5px}
+.sb-head span:first-child{color:var(--muted3)}
+.sb-head span:last-child{font-family:'DM Mono',monospace;color:var(--white);font-weight:500}
+.sb-track{height:5px;background:rgba(255,255,255,0.06);border-radius:100px;overflow:hidden}
+.sb-fill{height:100%;border-radius:100px;width:0;transition:width 1.4s cubic-bezier(0.4,0,0.2,1)}
+.score-focus.on-sec .sb-fill{width:var(--w)}
+.fill-red{background:linear-gradient(90deg,var(--red),var(--red2))}
+.fill-gold{background:linear-gradient(90deg,#f5c842,#f9d970)}
+.fill-blue{background:linear-gradient(90deg,#4da3ff,#7ec8ff)}
+.fill-green{background:linear-gradient(90deg,#22c55e,#4ade80)}
+
+.score-insight{
+  margin-top:18px;padding:14px 16px;
+  background:rgba(255,45,45,0.06);border:1px solid rgba(255,45,45,0.12);
+  border-radius:12px;font-size:12.5px;color:var(--muted3);
+  font-style:italic;position:relative;z-index:1;line-height:1.5;
 }
-@media(max-width:768px){ .cta-section{ padding: 60px 20px 80px; } }
-.cta-glow-top {
-  position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
-  width: 600px; height: 400px;
-  background: radial-gradient(ellipse, rgba(255,51,51,0.18) 0%, transparent 70%);
-  pointer-events: none;
+.score-insight strong{color:var(--white);font-style:normal;font-weight:600}
+
+/* ── STATS ── */
+.stats-wrap{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);border-top:1px solid var(--line)}
+.stat{
+  padding:30px 22px;
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  position:relative;overflow:hidden;
+  opacity:0;transform:translateY(12px);
+  transition:opacity 0.5s,transform 0.5s;
 }
-.cta-box {
-  max-width: 680px; margin: 0 auto; text-align: center;
-  position: relative; z-index: 1;
+.stat:nth-child(2n){border-right:none}
+.stat:nth-last-child(-n+2){border-bottom:none}
+.stat.on{opacity:1;transform:none}
+.stat::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,45,45,0.4),transparent);transform:scaleX(0);transition:transform 0.6s 0.3s}
+.stat.on::after{transform:scaleX(1)}
+.stat-n{font-family:'Playfair Display',serif;font-weight:900;font-size:48px;line-height:1;color:var(--white);letter-spacing:-1px}
+.stat-unit{font-size:20px;color:var(--red);margin-left:2px}
+.stat-l{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-top:8px;line-height:1.4}
+
+/* ── COMPARISON FREE vs PREMIUM ── */
+.comp-table{margin-top:36px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--card)}
+.comp-head{display:grid;grid-template-columns:1.4fr 1fr 1fr;background:#0c0c0c;border-bottom:1px solid var(--line)}
+.comp-head>div{padding:16px 12px;text-align:center;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2)}
+.comp-head>div:first-child{text-align:left;padding-left:18px}
+.comp-head .col-pre{color:var(--red);position:relative}
+.comp-head .col-pre::before{content:'★';margin-right:5px;font-size:9px}
+.comp-row{display:grid;grid-template-columns:1.4fr 1fr 1fr;border-bottom:1px solid var(--line);transition:background 0.2s;opacity:0;transform:translateY(8px);transition:opacity 0.4s,transform 0.4s,background 0.2s}
+.comp-row.on{opacity:1;transform:none}
+.comp-row:last-child{border-bottom:none}
+.comp-row:hover{background:#181818}
+.comp-row>div{padding:14px 12px;display:flex;align-items:center;justify-content:center;font-size:12.5px;color:var(--muted3)}
+.comp-row>div:first-child{justify-content:flex-start;padding-left:18px;color:var(--white);font-weight:500;font-size:13px}
+.comp-yes{color:var(--red);font-size:16px;font-weight:700}
+.comp-no{color:#3a3a3a;font-size:14px}
+.comp-limit{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted2)}
+.comp-cta{padding:18px;text-align:center;background:#0c0c0c;border-top:1px solid var(--line);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2)}
+.comp-cta strong{color:var(--red)}
+
+/* ── WHY ── */
+.why-grid{display:flex;flex-direction:column;gap:12px;margin-top:36px}
+.why-card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:18px;padding:22px;
+  opacity:0;transform:translateY(10px);
+  transition:opacity 0.5s,transform 0.5s;
+  position:relative;overflow:hidden;
 }
-.cta-eyebrow {
-  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
-  color: rgba(255,51,51,0.7); margin-bottom: 20px;
+.why-card.on{opacity:1;transform:none}
+.why-num{
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-style:italic;
+  font-size:46px;color:rgba(255,45,45,0.18);
+  line-height:1;margin-bottom:8px;letter-spacing:-1px;
 }
-.cta-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(56px, 10vw, 96px);
-  line-height: .88; letter-spacing: 1px; margin-bottom: 20px;
+.why-title{font-size:16.5px;font-weight:700;margin-bottom:8px;color:var(--white);letter-spacing:-0.3px}
+.why-desc{font-size:12.5px;color:var(--muted3);line-height:1.65;font-weight:300}
+.why-desc em{color:var(--white);font-style:normal;font-weight:500}
+
+/* ── PROCESS ── */
+.process{position:relative;margin-top:40px}
+.process::before{content:'';position:absolute;left:19px;top:14px;bottom:14px;width:1px;background:linear-gradient(to bottom,var(--red) 0%,rgba(255,45,45,0.05) 100%)}
+.proc-step{
+  display:grid;grid-template-columns:40px 1fr;gap:18px;
+  padding:24px 0;border-bottom:1px solid var(--line);
+  opacity:0;transform:translateX(-16px);transition:opacity 0.55s,transform 0.55s;
 }
-.cta-title span { color: var(--red); display: block; text-shadow: 0 0 60px rgba(255,51,51,0.5); }
-.cta-desc {
-  font-size: 15px; color: rgba(255,255,255,0.4);
-  line-height: 1.75; font-weight: 300; margin-bottom: 36px;
-  max-width: 440px; margin-left: auto; margin-right: auto;
+.proc-step:last-child{border-bottom:none;padding-bottom:0}
+.proc-step.on{opacity:1;transform:none}
+.proc-num{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--bg);border:1px solid rgba(255,45,45,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-weight:900;font-size:16px;color:var(--red);
+  position:relative;z-index:1;flex-shrink:0;
+  box-shadow:0 0 20px rgba(255,45,45,0.12);
 }
-.cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.cta-note { font-size: 11px; color: var(--muted); margin-top: 20px; }
+.proc-title{font-size:16.5px;font-weight:700;margin-bottom:8px;padding-top:8px;letter-spacing:-0.3px}
+.proc-desc{font-size:12.5px;color:var(--muted3);line-height:1.7;font-weight:300}
+.proc-tag{display:inline-block;margin-top:12px;background:rgba(255,45,45,0.08);border:1px solid rgba(255,45,45,0.15);color:rgba(255,100,100,0.95);font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 11px;border-radius:100px}
+
+/* ── APP MOCKUP ── */
+.mockup-wrap{
+  margin-top:36px;border-radius:24px;overflow:hidden;
+  border:1px solid var(--line2);
+  box-shadow:0 32px 80px rgba(0,0,0,0.6),0 0 0 1px rgba(255,45,45,0.05),inset 0 1px 0 rgba(255,255,255,0.05);
+  opacity:0;transform:translateY(24px) scale(0.97);transition:opacity 0.9s,transform 0.9s;
+}
+.mockup-wrap.on{opacity:1;transform:none}
+.mockup-chrome{background:#0d0d0d;padding:11px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--line)}
+.chrome-dots{display:flex;gap:5px}
+.cd{width:10px;height:10px;border-radius:50%}
+.cd-r{background:#ff5f56}.cd-y{background:#ffbd2e}.cd-g{background:#27c93f}
+.chrome-url{flex:1;margin-left:10px;background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:6px;padding:5px 12px;font-family:'DM Mono',monospace;font-size:9px;color:var(--muted2);text-align:center}
+.chrome-url span{color:var(--red)}
+.mockup-body{background:var(--bg);padding:14px;display:flex;flex-direction:column;gap:10px}
+
+.mk-hero{background:linear-gradient(145deg,#1a0808,#120808,#0e0808);border-radius:18px;padding:18px;border:1px solid rgba(255,45,45,0.15);position:relative;overflow:hidden}
+.mk-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:140px;height:140px;background:radial-gradient(circle,rgba(255,45,45,0.2),transparent 70%)}
+.mk-greeting{font-family:'Playfair Display',serif;font-style:italic;font-size:22px;color:var(--red);margin-bottom:14px;position:relative;z-index:1}
+.mk-score-row{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
+.mk-score-num{font-size:54px;font-weight:800;line-height:1;color:var(--white);letter-spacing:-2px}
+.mk-score-sub{font-size:11px;color:var(--red);margin-top:4px;font-weight:600}
+.mk-streak{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:1px;margin-top:2px}
+.mk-ring{position:relative;width:72px;height:72px}
+.mk-ring svg{transform:rotate(-90deg)}
+.mk-rb{fill:none;stroke:rgba(255,255,255,0.07);stroke-width:5}
+.mk-rf{fill:none;stroke:url(#gr1);stroke-width:5;stroke-dasharray:188;stroke-dashoffset:188;stroke-linecap:round;transition:stroke-dashoffset 1.4s cubic-bezier(0.4,0,0.2,1) 0.5s}
+.mockup-wrap.on .mk-rf{stroke-dashoffset:47}
+.mk-ring-lbl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:17px;font-weight:800;color:var(--white);line-height:1}
+.mk-ring-sub{font-size:8px;color:var(--muted2);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+
+.mk-kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kpi{background:var(--card2);border-radius:14px;padding:13px 11px;border:1px solid var(--line);opacity:0;transform:translateY(6px);transition:opacity 0.4s,transform 0.4s}
+.mockup-wrap.on .kpi:nth-child(1){opacity:1;transform:none;transition-delay:0.2s}
+.mockup-wrap.on .kpi:nth-child(2){opacity:1;transform:none;transition-delay:0.32s}
+.mockup-wrap.on .kpi:nth-child(3){opacity:1;transform:none;transition-delay:0.44s}
+.kpi-icon{font-size:15px;margin-bottom:5px}
+.kpi-val{font-size:22px;font-weight:800;line-height:1;letter-spacing:-0.5px}
+.kpi-lab{font-family:'DM Mono',monospace;font-size:8px;color:var(--muted2);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+
+.mk-bars{background:var(--card2);border-radius:16px;padding:14px;border:1px solid var(--line)}
+.mk-bar-title{font-size:11px;font-weight:600;margin-bottom:11px;color:var(--muted3);font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase}
+.mk-bar-row{margin-bottom:9px}
+.mk-bar-row:last-child{margin-bottom:0}
+.mk-bar-head{display:flex;justify-content:space-between;font-size:10.5px;margin-bottom:4px}
+.mk-bar-head span:last-child{font-family:'DM Mono',monospace;color:var(--muted2)}
+.mk-bar-track{height:4px;background:rgba(255,255,255,0.05);border-radius:100px;overflow:hidden}
+.mk-bar-fill{height:100%;border-radius:100px;width:0;transition:width 1.2s cubic-bezier(0.4,0,0.2,1)}
+.mockup-wrap.on .mk-bar-fill{width:var(--w)}
+.bar-p{background:linear-gradient(90deg,#4da3ff,#6bc5ff)}
+.bar-g{background:linear-gradient(90deg,#f5c842,#f9d970)}
+.bar-l{background:linear-gradient(90deg,#ff9a3c,#ffbe7d)}
+
+.mk-session{background:linear-gradient(135deg,rgba(255,45,45,0.1),rgba(255,104,48,0.05));border:1px solid rgba(255,45,45,0.15);border-radius:16px;padding:15px}
+.mk-sess-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-bottom:5px}
+.mk-sess-name{font-family:'Playfair Display',serif;font-style:italic;font-size:22px;color:var(--white);margin-bottom:11px}
+.mk-sess-ex{font-size:11px;color:var(--muted3);line-height:2;font-family:'DM Mono',monospace}
+.mk-sess-done{color:rgba(255,100,100,0.75)}
+.mk-sess-done::before{content:'✓ ';color:var(--red)}
+.mk-sess-next::before{content:'→ ';color:var(--red)}
+.mk-sess-next{color:var(--white);font-weight:500}
+.mk-sess-todo{color:var(--muted2)}
+.mk-sess-todo::before{content:'· '}
+.mk-sess-btn{display:flex;align-items:center;justify-content:center;gap:6px;background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;padding:12px;border-radius:100px;font-size:12px;font-weight:700;margin-top:12px;box-shadow:0 4px 16px rgba(255,45,45,0.3)}
+
+/* ── TESTIMONIALS ── */
+.test-grid{display:flex;flex-direction:column;gap:12px;margin-top:36px}
+.test-card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:18px;padding:22px;position:relative;
+  opacity:0;transform:translateY(12px);transition:opacity 0.5s,transform 0.5s;
+}
+.test-card.on{opacity:1;transform:none}
+.test-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:18px;line-height:1.4;color:var(--white);margin-bottom:18px;position:relative;padding-left:14px}
+.test-quote::before{content:'"';position:absolute;left:-4px;top:-8px;font-size:42px;color:var(--red);line-height:1;font-weight:900}
+.test-foot{display:flex;align-items:center;gap:12px}
+.test-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--red2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;flex-shrink:0;font-family:'Playfair Display',serif;font-style:italic}
+.test-info{flex:1;min-width:0}
+.test-name{font-size:13px;font-weight:600;color:var(--white)}
+.test-meta{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+.test-stars{color:var(--gold);font-size:11px;letter-spacing:1px}
+.test-tag{position:absolute;top:18px;right:18px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);background:rgba(255,45,45,0.08);border:1px solid rgba(255,45,45,0.15);padding:4px 9px;border-radius:100px}
+
+/* ── IMPACT ── */
+.impact-sec{position:relative;z-index:2;padding:80px 24px;background:var(--bg2)}
+.impact-lines{display:flex;flex-direction:column;gap:18px;margin-top:40px}
+.impact-line{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(30px,8.5vw,50px);line-height:1;color:rgba(255,255,255,0.1);transition:color 0.5s;text-align:left;letter-spacing:-1px}
+.impact-line.on{color:var(--white)}
+.impact-line em{font-style:italic;color:var(--red)}
+
+.impact-divider{margin-top:42px;padding-top:42px;border-top:1px solid var(--line);text-align:left}
+.impact-claim{font-family:'Playfair Display',serif;font-weight:900;font-style:italic;font-size:clamp(34px,9.5vw,52px);line-height:1;color:var(--white);opacity:0;transform:translateY(16px);transition:opacity 0.7s,transform 0.7s;letter-spacing:-1px}
+.impact-claim.on{opacity:1;transform:none}
+.impact-claim span{color:var(--red)}
+
+/* ── PRICING ── */
+.pricing-sec{position:relative;z-index:2;padding:80px 24px}
+.price-card{
+  margin-top:36px;
+  background:linear-gradient(145deg,rgba(255,45,45,0.08),rgba(255,104,48,0.03),transparent);
+  border:1px solid rgba(255,45,45,0.22);
+  border-radius:24px;padding:34px 24px;
+  text-align:center;position:relative;overflow:hidden;
+  opacity:0;transform:translateY(20px);transition:opacity 0.8s,transform 0.8s;
+}
+.price-card.on{opacity:1;transform:none}
+.price-card::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:260px;height:200px;background:radial-gradient(ellipse,rgba(255,45,45,0.12),transparent 70%);pointer-events:none}
+.price-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,45,45,0.1);border:1px solid rgba(255,45,45,0.22);color:rgba(255,90,90,0.95);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:6px 13px;border-radius:100px;margin-bottom:22px;position:relative;z-index:1}
+.price-main{font-family:'Playfair Display',serif;font-weight:900;font-size:76px;line-height:1;color:var(--white);margin-bottom:4px;position:relative;z-index:1;letter-spacing:-2px}
+.price-main span{font-family:'Outfit',sans-serif;font-size:24px;color:var(--muted3);font-weight:300}
+.price-period{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-bottom:26px;position:relative;z-index:1}
+.price-period strong{color:var(--white)}
+.price-features{display:flex;flex-direction:column;gap:10px;margin-bottom:30px;text-align:left;position:relative;z-index:1}
+.pf{display:flex;align-items:center;gap:11px;font-size:13.5px;color:var(--white);font-weight:400}
+.pf-check{width:20px;height:20px;border-radius:50%;flex-shrink:0;background:rgba(255,45,45,0.15);border:1px solid rgba(255,45,45,0.3);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--red);font-weight:700}
+.price-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;padding:18px;border-radius:100px;font-size:15px;font-weight:700;box-shadow:0 12px 40px rgba(255,45,45,0.45),inset 0 1px 0 rgba(255,255,255,0.15);position:relative;z-index:1;animation:glow-btn 3s 3s ease-in-out infinite}
+@keyframes glow-btn{0%,100%{box-shadow:0 12px 40px rgba(255,45,45,0.45),inset 0 1px 0 rgba(255,255,255,0.15)}50%{box-shadow:0 16px 60px rgba(255,45,45,0.7),inset 0 1px 0 rgba(255,255,255,0.15)}}
+.price-note{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted2);margin-top:14px;position:relative;z-index:1;letter-spacing:0.5px}
+
+/* ── FAQ ── */
+.faq-list{margin-top:32px;display:flex;flex-direction:column;gap:8px}
+.faq-item{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;opacity:0;transform:translateY(8px);transition:opacity 0.4s,transform 0.4s}
+.faq-item.on{opacity:1;transform:none}
+.faq-q{padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px;font-weight:600;color:var(--white);width:100%;text-align:left;cursor:pointer}
+.faq-icon{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(255,45,45,0.1);border:1px solid rgba(255,45,45,0.2);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:300;transition:transform 0.3s}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s ease;padding:0 18px}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:18px}
+.faq-a p{font-size:13px;color:var(--muted3);line-height:1.65;font-weight:300}
+
+/* ── CTA FINAL ── */
+.cta-sec{position:relative;z-index:2;padding:0 20px 80px}
+.cta-inner{
+  background:linear-gradient(145deg,rgba(255,45,45,0.12),rgba(255,104,48,0.06),transparent);
+  border:1px solid rgba(255,45,45,0.18);border-radius:28px;
+  padding:56px 24px;text-align:center;
+  position:relative;overflow:hidden;
+  opacity:0;transform:translateY(24px);transition:opacity 0.9s,transform 0.9s;
+}
+.cta-inner.on{opacity:1;transform:none}
+.cta-inner::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:300px;height:250px;background:radial-gradient(ellipse,rgba(255,45,45,0.18),transparent 70%);pointer-events:none}
+.cta-wm{position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);font-family:'Playfair Display',serif;font-weight:900;font-style:italic;font-size:120px;letter-spacing:4px;line-height:1;color:rgba(255,45,45,0.04);white-space:nowrap;pointer-events:none}
+.cta-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(40px,11.5vw,62px);line-height:0.92;margin-bottom:18px;position:relative;z-index:1;letter-spacing:-1.5px}
+.cta-h em{font-style:italic;color:var(--red);display:block}
+.cta-sub{font-size:14.5px;color:var(--muted3);line-height:1.7;max-width:320px;margin:0 auto 34px;font-weight:300;position:relative;z-index:1}
+.cta-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;padding:18px 32px;border-radius:100px;font-size:15px;font-weight:700;box-shadow:0 12px 40px rgba(255,45,45,0.45),inset 0 1px 0 rgba(255,255,255,0.15);position:relative;z-index:1}
+.cta-note{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--muted2);margin-top:16px;position:relative;z-index:1}
 
 /* ── FOOTER ── */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 32px 60px;
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 16px;
-}
-@media(max-width:768px){ footer{ padding: 24px 20px; flex-direction: column; align-items: center; text-align: center; } }
-.footer-left { display: flex; flex-direction: column; gap: 6px; }
-.footer-copy { font-size: 11px; color: var(--muted); }
-.footer-links { display: flex; gap: 20px; }
-.footer-link { font-size: 11px; color: var(--muted); text-decoration: none; transition: color .2s; }
-.footer-link:hover { color: var(--text); }
+footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:32px 24px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.foot-logo{font-family:'Playfair Display',serif;font-weight:900;font-size:16px;letter-spacing:4px;color:rgba(255,255,255,0.7)}
+.foot-logo em{font-style:italic;color:var(--red)}
+.foot-links{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+.foot-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);transition:color 0.2s}
+.foot-links a:hover{color:var(--red)}
+.foot-text{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
 
-/* ── SCROLL ANIMATIONS ── */
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
-.reveal.in { opacity: 1; transform: none; }
-.reveal-delay-1 { transition-delay: .1s; }
-.reveal-delay-2 { transition-delay: .2s; }
-.reveal-delay-3 { transition-delay: .3s; }
-.reveal-delay-4 { transition-delay: .4s; }
+/* ── DESKTOP ── */
+@media (min-width:768px){
+  nav{padding:18px 40px}
+  #hero{padding:0 40px 90px;justify-content:center}
+  .hero-content{max-width:680px}
+  h1{font-size:clamp(72px,9vw,112px)}
+  .hero-sub{font-size:17px;max-width:480px}
+  .hero-btns{flex-direction:row;max-width:480px}
+  .btn-hero,.btn-ghost{flex:1}
+  .sec,.score-focus,.pricing-sec,.prob-sec,.impact-sec{padding:100px 40px}
+  .sec-inner{max-width:980px;margin:0 auto}
+  .pillars{display:grid;grid-template-columns:1fr 1fr;gap:1px}
+  .pillar{border-radius:0}
+  .stats-wrap{grid-template-columns:repeat(4,1fr)}
+  .stat:nth-child(2n){border-right:1px solid var(--line)}
+  .stat:nth-child(4n){border-right:none}
+  .stat:nth-last-child(-n+2){border-bottom:1px solid var(--line)}
+  .stat:nth-last-child(-n+4){border-bottom:none}
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .test-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .cta-sec{padding:0 40px 100px}
+  .score-big,.mockup-wrap,.cta-inner,.price-card{max-width:720px;margin-left:auto;margin-right:auto}
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="logo">EVRY<span style="color:var(--red);text-shadow:0 0 16px var(--red-glow)">Ø</span>NE</div>
-  <div class="nav-links">
-    <a class="nav-link" href="#features">Programme</a>
-    <a class="nav-link" href="#how">Comment</a>
-    <a class="nav-cta" href="#cta">Commencer →</a>
-  </div>
+  <div class="logo"><span class="logo-dot"></span>EVRY<em>Ø</em>NE</div>
+  <a href="https://app.evryoneclub.com" class="nav-pill">Commencer →</a>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
+  <div class="hero-spotlight"></div>
+  <div class="hero-bg-word">niveau</div>
 
-  <!-- Left -->
   <div class="hero-content">
-    <div class="hero-badge">
-      <div class="badge-dot"></div>
-      Entraînement &amp; Nutrition Personnalisé
-    </div>
-    <h1 class="hero-h1">
-      <span class="h1-dim">TRANSFORME</span><br>
-      <span class="h1-white">TON CORPS.</span><br>
-      <span class="h1-red">TON RYTHME.</span>
+    <div class="hero-eyebrow"><span class="eyebrow-dot"></span>Le système de discipline complet</div>
+
+    <h1>
+      <span class="l1">Ton niveau.</span>
+      <span class="l2">Chaque jour.</span>
     </h1>
-    <p class="hero-desc">
-      Plan d'entraînement et de nutrition <strong>100% adapté à toi</strong> — 
-      suivi en temps réel, récupération optimisée, progression visible.
+
+    <p class="hero-sub">
+      EVRYØNE transforme ta discipline en <strong>résultats mesurables</strong>.<br>
+      Entraînement, nutrition, récupération — <em>tout connecté</em> dans un seul système.
     </p>
-    <div class="hero-actions">
-      <a href="#cta" class="btn-primary">
-        Rejoindre maintenant
-        <div class="btn-primary-arrow">→</div>
-      </a>
-      <a href="#how" class="btn-ghost">Voir comment ça marche ↓</a>
+
+    <p class="hero-claim">— Ce n'est pas une app. C'est ton standard.</p>
+
+    <div class="hero-btns">
+      <a href="https://app.evryoneclub.com" class="btn-hero">Commencer maintenant →</a>
+      <a href="#systeme" class="btn-ghost">Voir le système</a>
     </div>
+
     <div class="hero-trust">
-      <div class="trust-item"><strong>100%</strong>Personnalisé</div>
-      <div style="width:1px;height:28px;background:var(--border)"></div>
-      <div class="trust-item"><strong>3</strong>Piliers : perf · nutri · récup</div>
-      <div style="width:1px;height:28px;background:var(--border)"></div>
-      <div class="trust-item"><strong>7j/7</strong>Suivi quotidien</div>
+      <div class="trust-stars">★★★★★</div>
+      <div class="trust-text"><strong>4.9/5</strong> · Premiers utilisateurs</div>
     </div>
   </div>
 
-  <!-- Right — phone mockup -->
-  <div class="hero-visual">
-    <div class="phone-wrap">
-      <div class="phone-glow"></div>
-
-      <!-- Floating badges -->
-      <div class="badge-float bf-left">
-        <div class="bf-label">Streak actuel</div>
-        <div class="bf-val bf-streak">28 🔥</div>
-        <div class="bf-sub">jours consécutifs</div>
-      </div>
-      <div class="badge-float bf-right">
-        <div class="bf-label">Score du jour</div>
-        <div class="bf-val" style="color:#22c55e">82/100</div>
-        <div class="bf-sub">↑ +6 pts</div>
-      </div>
-
-      <!-- Phone frame -->
-      <div class="phone-frame">
-        <div class="phone-notch"></div>
-        <div class="phone-screen">
-          <!-- Header -->
-          <div class="ps-header">
-            <div class="ps-logo">EVRY<span>Ø</span>NE</div>
-            <div class="ps-avatar">T</div>
-          </div>
-          <!-- Body -->
-          <div class="ps-body">
-            <!-- Daily score ring -->
-            <div class="ps-score-card">
-              <div class="ps-ring">
-                <svg viewBox="0 0 64 64" width="64" height="64">
-                  <circle cx="32" cy="32" r="26" fill="none" stroke="#222" stroke-width="6"/>
-                  <circle cx="32" cy="32" r="26" fill="none" stroke="#22c55e" stroke-width="6"
-                    stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="49"/>
-                </svg>
-                <div class="ps-ring-val">72<div class="ps-ring-sub">/100</div></div>
-              </div>
-              <div class="ps-score-rows">
-                <div style="font-size:8px;color:#666;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">DAILY SCORE</div>
-                <div class="ps-score-row">
-                  <div class="ps-score-label"><div class="ps-dot" style="background:#f59e0b"></div>Training</div>
-                  <div class="ps-score-pts">22/30</div>
-                </div>
-                <div class="ps-score-row">
-                  <div class="ps-score-label"><div class="ps-dot" style="background:#22c55e"></div>Nutrition</div>
-                  <div class="ps-score-pts">24/30</div>
-                </div>
-                <div class="ps-score-row">
-                  <div class="ps-score-label"><div class="ps-dot" style="background:#3b82f6"></div>Récupération</div>
-                  <div class="ps-score-pts">15/20</div>
-                </div>
-                <div class="ps-score-row">
-                  <div class="ps-score-label"><div class="ps-dot" style="background:#ff3333"></div>Streak</div>
-                  <div class="ps-score-pts">11/20</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Stats grid -->
-            <div class="ps-stats">
-              <div class="ps-stat">
-                <div class="ps-stat-lbl">🔥 Calories</div>
-                <div class="ps-stat-val" style="font-size:16px">1840</div>
-                <div class="ps-stat-sub">/ 2200 kcal</div>
-                <div class="ps-bar" style="margin-top:5px"><div class="ps-bar-fill" style="width:78%;background:var(--red)"></div></div>
-              </div>
-              <div class="ps-stat">
-                <div class="ps-stat-lbl">💧 Hydrat.</div>
-                <div class="ps-stat-val" style="font-size:16px">5/8</div>
-                <div class="ps-stat-sub">verres · 1.25L</div>
-                <div class="ps-bar" style="margin-top:5px"><div class="ps-bar-fill" style="width:62%;background:#3b82f6"></div></div>
-              </div>
-            </div>
-
-            <!-- Next session -->
-            <div class="ps-session">
-              <div class="ps-session-bg"></div>
-              <div class="ps-session-label">PROCHAINE SÉANCE</div>
-              <div class="ps-session-name">PUSH DAY A</div>
-              <div class="ps-session-info">4 exercices · ~55 min · Repos 90s</div>
-              <div style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:var(--red);color:#fff;padding:5px 12px;border-radius:99px;font-size:8px;font-weight:700;letter-spacing:1px">
-                Commencer →
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottom nav -->
-          <div class="ps-nav">
-            <div class="ps-nav-item active">
-              <svg class="ps-nav-icon" viewBox="0 0 24 24" fill="none" stroke="#ff3333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
-                <path d="M9 21V12h6v9"/>
-              </svg>
-              <div class="ps-nav-label" style="color:var(--red)">Accueil</div>
-            </div>
-            <div class="ps-nav-item">
-              <svg class="ps-nav-icon" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2" stroke-linecap="round">
-                <rect x="1" y="10" width="3" height="4" rx="1"/><rect x="20" y="10" width="3" height="4" rx="1"/>
-                <rect x="4" y="8" width="3" height="8" rx="1"/><rect x="17" y="8" width="3" height="8" rx="1"/>
-                <line x1="7" y1="12" x2="17" y2="12" stroke-width="2.5"/>
-              </svg>
-              <div class="ps-nav-label">Training</div>
-            </div>
-            <div class="ps-nav-item">
-              <svg class="ps-nav-icon" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2" stroke-linecap="round">
-                <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/>
-                <path d="M21 15V2a5 5 0 0 0-5 5v6h3v7"/>
-              </svg>
-              <div class="ps-nav-label">Nutrition</div>
-            </div>
-            <div class="ps-nav-item">
-              <svg class="ps-nav-icon" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2" stroke-linecap="round">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-              </svg>
-              <div class="ps-nav-label">Progress</div>
-            </div>
-            <div class="ps-nav-item">
-              <svg class="ps-nav-icon" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2" stroke-linecap="round">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-              </svg>
-              <div class="ps-nav-label">Récup.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-orb"><div class="scroll-dot"></div></div>
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <div class="marquee-item"><strong>100%</strong> Personnalisé <span class="marquee-sep">·</span></div>
-    <div class="marquee-item"><strong>Plan</strong> Entraînement <span class="marquee-sep">·</span></div>
-    <div class="marquee-item"><strong>Plan</strong> Nutrition <span class="marquee-sep">·</span></div>
-    <div class="marquee-item"><strong>Suivi</strong> Quotidien <span class="marquee-sep">·</span></div>
-    <div class="marquee-item"><strong>Récupération</strong> Optimisée <span class="marquee-sep">·</span></div>
-    <div class="marquee-item"><strong>Progression</strong> Réelle <span class="marquee-sep">·</span></div>
-    <div class="marquee-item"><strong>100%</strong> Personnalisé <span class="marquee-sep">·</span></div>
-    <div class="marquee-item"><strong>Plan</strong> Entraînement <span class="marquee-sep">·</span></div>
-    <div class="marquee-item"><strong>Plan</strong> Nutrition <span class="marquee-sep">·</span></div>
-    <div class="marquee-item"><strong>Suivi</strong> Quotidien <span class="marquee-sep">·</span></div>
-    <div class="marquee-item"><strong>Récupération</strong> Optimisée <span class="marquee-sep">·</span></div>
-    <div class="marquee-item"><strong>Progression</strong> Réelle <span class="marquee-sep">·</span></div>
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">★ Score Quotidien</span><span class="ticker-sep">•</span>
+    <span class="ticker-item">Discipline Mesurable</span><span class="ticker-sep">•</span>
+    <span class="ticker-item">Tout Connecté</span><span class="ticker-sep">•</span>
+    <span class="ticker-item">Résultats Réels</span><span class="ticker-sep">•</span>
+    <span class="ticker-item">Ton Standard</span><span class="ticker-sep">•</span>
+    <span class="ticker-item">Zéro Compromis</span><span class="ticker-sep">•</span>
+    <span class="ticker-item">★ Score Quotidien</span><span class="ticker-sep">•</span>
+    <span class="ticker-item">Discipline Mesurable</span><span class="ticker-sep">•</span>
+    <span class="ticker-item">Tout Connecté</span><span class="ticker-sep">•</span>
+    <span class="ticker-item">Résultats Réels</span><span class="ticker-sep">•</span>
+    <span class="ticker-item">Ton Standard</span><span class="ticker-sep">•</span>
+    <span class="ticker-item">Zéro Compromis</span><span class="ticker-sep">•</span>
   </div>
 </div>
+
+<!-- PROBLEM -->
+<section class="prob-sec">
+  <div class="sec-inner">
+    <div class="prob-kicker">Le problème</div>
+    <div class="prob-lines">
+      <div class="prob-line">Tu t'entraînes.</div>
+      <div class="prob-line">Tu manges <em>mieux</em>.</div>
+      <div class="prob-line">Mais tu manques de constance.</div>
+    </div>
+    <div class="prob-answer">
+      <strong>Parce que tu ne mesures rien vraiment.</strong><br>
+      Tu as des données partout — mais aucune vision globale. Tu ne sais pas si ta journée a été disciplinée ou non. <em>EVRYØNE règle ça.</em>
+    </div>
+  </div>
+</section>
 
 <!-- STATS -->
-<div class="stats-section">
-  <div class="stat-item reveal">
-    <span class="stat-num"><span class="stat-accent">100</span>%</span>
-    <span class="stat-lbl">Personnalisé</span>
-  </div>
-  <div class="stat-item reveal reveal-delay-1">
-    <span class="stat-num">7</span>
-    <span class="stat-lbl">Jours / semaine</span>
-  </div>
-  <div class="stat-item reveal reveal-delay-2">
-    <span class="stat-num">3</span>
-    <span class="stat-lbl">Piliers — perf · nutri · récup</span>
-  </div>
-  <div class="stat-item reveal reveal-delay-3">
-    <span class="stat-num"><span class="stat-accent">1</span></span>
-    <span class="stat-lbl">Seul objectif : ta progression</span>
-  </div>
+<div class="stats-wrap">
+  <div class="stat"><div class="stat-n" data-count="100"><span class="stat-unit">%</span></div><div class="stat-l">Tout connecté</div></div>
+  <div class="stat"><div class="stat-n" data-count="100"><span class="stat-unit">/100</span></div><div class="stat-l">Score global quotidien</div></div>
+  <div class="stat"><div class="stat-n" data-count="6"></div><div class="stat-l">Piliers du système</div></div>
+  <div class="stat"><div class="stat-n" data-count="0"></div><div class="stat-l">App supplémentaire</div></div>
 </div>
 
-<!-- FEATURES -->
-<section class="section" id="features">
-  <div class="section-tag reveal">Ce que tu obtiens</div>
-  <h2 class="section-title reveal">PROGRAMME <span>COMPLET</span></h2>
-  <p class="section-sub reveal">Tout ce dont tu as besoin pour transformer ton corps — dans une seule interface.</p>
-  <div class="features-grid">
-    <div class="feature-card featured reveal">
-      <div class="feature-icon">🏋️</div>
-      <div class="feature-name">Entraînement sur mesure</div>
-      <div class="feature-desc">Séances conçues pour ton niveau, tes objectifs et ton équipement. Chaque exercice, chaque série — calculé pour toi. Timer de repos intégré, suivi des charges, progression automatique.</div>
-    </div>
-    <div class="feature-card reveal reveal-delay-1">
-      <div class="feature-icon">🥗</div>
-      <div class="feature-name">Plan nutritionnel perso</div>
-      <div class="feature-desc">Calories, macros, timing des repas. Un plan aligné sur tes entraînements et tes vraies préférences alimentaires.</div>
-    </div>
-    <div class="feature-card reveal reveal-delay-1">
-      <div class="feature-icon">📈</div>
-      <div class="feature-name">Suivi de progression</div>
-      <div class="feature-desc">Records personnels, courbe de poids, photos d'évolution. Tu vois ta transformation en temps réel.</div>
-    </div>
-    <div class="feature-card reveal reveal-delay-2">
-      <div class="feature-icon">🔋</div>
-      <div class="feature-name">Récupération optimisée</div>
-      <div class="feature-desc">Sommeil, hydratation, fatigue. Parce que c'est pendant la récup que le corps change vraiment.</div>
-    </div>
-    <div class="feature-card reveal reveal-delay-2">
-      <div class="feature-icon">⚡</div>
-      <div class="feature-name">Daily Score</div>
-      <div class="feature-desc">Un score quotidien sur 100 qui combine training, nutrition, récupération et streak. La gamification de ta progression.</div>
-    </div>
-    <div class="feature-card reveal reveal-delay-3">
-      <div class="feature-icon">🎯</div>
-      <div class="feature-name">Objectifs &amp; Streak</div>
-      <div class="feature-desc">Badges, objectifs hebdo, streak de jours. La motivation se construit jour après jour.</div>
+<!-- SYSTÈME / PILLARS -->
+<section class="sec sec-alt" id="systeme">
+  <div class="sec-inner">
+    <div class="sec-kicker">Le système</div>
+    <h2 class="sec-h rv">6 piliers.<br><em>Un score.</em></h2>
+    <p class="sec-sub rv">Chaque pilier nourrit le score quotidien. Ensemble, ils forment un système — pas une liste de features.</p>
+
+    <div class="pillars">
+      <div class="pillar"><div class="pillar-icon">🧠</div><div class="pillar-body">
+        <div class="pillar-header"><div class="pillar-name">Score quotidien</div><div class="pillar-diff">Cœur</div></div>
+        <div class="pillar-desc">Ta journée transformée en score /100. Vision instantanée de ton niveau. Tu ne peux plus te mentir.</div>
+        <div class="pillar-vs">
+          <div class="vs-row vs-no"><span class="vs-icon">✕</span> Autres apps : données séparées, aucune synthèse</div>
+          <div class="vs-row vs-yes"><span class="vs-icon">✓</span> EVRYØNE : un score, une vérité quotidienne</div>
+        </div>
+      </div></div>
+
+      <div class="pillar"><div class="pillar-icon">🏋️</div><div class="pillar-body">
+        <div class="pillar-header"><div class="pillar-name">Entraînement intelligent</div><div class="pillar-diff">Structure</div></div>
+        <div class="pillar-desc">Routines personnalisées, suivi des charges, progression en temps réel. Pas une liste d'exos — une logique.</div>
+        <div class="pillar-vs">
+          <div class="vs-row vs-no"><span class="vs-icon">✕</span> Autres : liste d'exercices statique</div>
+          <div class="vs-row vs-yes"><span class="vs-icon">✓</span> EVRYØNE : logique + progression + structure</div>
+        </div>
+      </div></div>
+
+      <div class="pillar"><div class="pillar-icon">🍽️</div><div class="pillar-body">
+        <div class="pillar-header"><div class="pillar-name">Nutrition complète</div><div class="pillar-diff">Vision totale</div></div>
+        <div class="pillar-desc">Macros + 28 micronutriments, suggestions automatiques, plan adapté à ton objectif réel.</div>
+        <div class="pillar-vs">
+          <div class="vs-row vs-no"><span class="vs-icon">✕</span> Autres : comptage de calories</div>
+          <div class="vs-row vs-yes"><span class="vs-icon">✓</span> EVRYØNE : vision complète + coaching</div>
+        </div>
+      </div></div>
+
+      <div class="pillar"><div class="pillar-icon">📈</div><div class="pillar-body">
+        <div class="pillar-header"><div class="pillar-name">Analyse & progression</div><div class="pillar-diff">Intelligence</div></div>
+        <div class="pillar-desc">Suivi des PRs, détection de plateau, stats avancées. Pas du tracking — une lecture intelligente.</div>
+        <div class="pillar-vs">
+          <div class="vs-row vs-no"><span class="vs-icon">✕</span> Autres : tracking simple</div>
+          <div class="vs-row vs-yes"><span class="vs-icon">✓</span> EVRYØNE : lecture intelligente de tes données</div>
+        </div>
+      </div></div>
+
+      <div class="pillar"><div class="pillar-icon">😴</div><div class="pillar-body">
+        <div class="pillar-header"><div class="pillar-name">Récupération</div><div class="pillar-diff">Différenciateur</div></div>
+        <div class="pillar-desc">Score récup, fatigue, stress, énergie. La performance réelle = récupération + entraînement.</div>
+        <div class="pillar-vs">
+          <div class="vs-row vs-no"><span class="vs-icon">✕</span> Autres : ignorent complètement ça</div>
+          <div class="vs-row vs-yes"><span class="vs-icon">✓</span> EVRYØNE : récup + training = perf réelle</div>
+        </div>
+      </div></div>
+
+      <div class="pillar"><div class="pillar-icon">🤖</div><div class="pillar-body">
+        <div class="pillar-header"><div class="pillar-name">Coach IA</div><div class="pillar-diff">Premium</div></div>
+        <div class="pillar-desc">Recommandations personnalisées, réponses instantanées, adaptation continue basée sur tes vraies données.</div>
+        <div class="pillar-vs">
+          <div class="vs-row vs-no"><span class="vs-icon">✕</span> Autres : contenu statique</div>
+          <div class="vs-row vs-yes"><span class="vs-icon">✓</span> EVRYØNE : assistant dynamique, basé sur toi</div>
+        </div>
+      </div></div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="section section-dark" id="how">
-  <div class="section-tag reveal">Le processus</div>
-  <h2 class="section-title reveal">COMMENT <span>ÇA MARCHE</span></h2>
-  <div class="steps-layout">
-    <div class="steps-list">
-      <div class="step-item reveal">
-        <div class="step-num">01</div>
-        <div>
-          <div class="step-title">Tu remplis ton profil</div>
-          <div class="step-desc">Âge, poids, objectif, équipement, préférences alimentaires. Plus c'est précis, plus le plan est puissant.</div>
-          <div class="step-pill">5 min pour débuter</div>
+<!-- SCORE FOCUS -->
+<section class="score-focus">
+  <div class="sec-inner">
+    <div class="sec-kicker">Le cœur du produit</div>
+    <h2 class="sec-h rv">Un score.<br><em>Zéro mensonge.</em></h2>
+    <p class="sec-sub rv">Les autres apps te donnent des données. EVRYØNE te donne une vérité.</p>
+
+    <div class="score-big rv">
+      <div class="score-bg-num">82</div>
+      <div class="score-label">Score du jour · Dimanche</div>
+      <div class="score-greeting">prêt à tout casser ?</div>
+
+      <div class="score-main">
+        <div class="score-number">82</div>
+        <div class="score-slash">/</div>
+        <div class="score-total">100</div>
+        <div class="score-meta">
+          <div class="score-up">🔥 +12 vs hier</div>
+          <div class="score-day">Streak · 28 jours</div>
         </div>
       </div>
-      <div class="step-item reveal reveal-delay-1">
-        <div class="step-num">02</div>
-        <div>
-          <div class="step-title">Ton programme est généré</div>
-          <div class="step-desc">Plan d'entraînement + plan nutritionnel complet avec macros et cibles caloriques — créés uniquement pour toi.</div>
-          <div class="step-pill">100% personnalisé</div>
-        </div>
+
+      <div class="score-bars">
+        <div class="sb"><div class="sb-head"><span>Entraînement</span><span>30/30</span></div><div class="sb-track"><div class="sb-fill fill-red" style="--w:100%"></div></div></div>
+        <div class="sb"><div class="sb-head"><span>Nutrition</span><span>22/30</span></div><div class="sb-track"><div class="sb-fill fill-gold" style="--w:73%"></div></div></div>
+        <div class="sb"><div class="sb-head"><span>Récupération</span><span>20/20</span></div><div class="sb-track"><div class="sb-fill fill-blue" style="--w:100%"></div></div></div>
+        <div class="sb"><div class="sb-head"><span>Régularité</span><span>10/20</span></div><div class="sb-track"><div class="sb-fill fill-green" style="--w:50%"></div></div></div>
       </div>
-      <div class="step-item reveal reveal-delay-2">
-        <div class="step-num">03</div>
-        <div>
-          <div class="step-title">Tu t'entraînes &amp; tu trackes</div>
-          <div class="step-desc">Chaque séance, chaque repas, chaque verre d'eau. Le tracker calcule tout et t'alerte si tu décroches.</div>
-          <div class="step-pill">Suivi quotidien</div>
-        </div>
+
+      <div class="score-insight"><strong>Ton niveau de récupération est optimal.</strong> Pousse fort sur ta prochaine séance.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MOCKUP -->
+<section class="sec sec-alt">
+  <div class="sec-inner">
+    <div class="sec-kicker">L'app en live</div>
+    <h2 class="sec-h rv">Tout en un<br><em>seul endroit.</em></h2>
+    <p class="sec-sub rv">Simple. Puissant. Pensé pour toi — disponible sur web et mobile.</p>
+
+    <div class="mockup-wrap rv">
+      <div class="mockup-chrome">
+        <div class="chrome-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
+        <div class="chrome-url">app.<span>evryoneclub</span>.com</div>
       </div>
-      <div class="step-item reveal reveal-delay-3">
-        <div class="step-num">04</div>
-        <div>
-          <div class="step-title">Tu progresses — pour de vrai</div>
-          <div class="step-desc">Stats, courbe de poids, photos d'évolution, PRs battus. Chaque effort prouvé par les données.</div>
-          <div class="step-pill">Résultats mesurables</div>
+      <div class="mockup-body">
+
+        <div class="mk-hero">
+          <div class="mk-greeting">prêt à tout casser ?</div>
+          <div class="mk-score-row">
+            <div>
+              <div class="mk-score-num">82</div>
+              <div class="mk-score-sub">🔥 +12 vs hier</div>
+              <div class="mk-streak">Streak · 28 jours</div>
+            </div>
+            <div class="mk-ring">
+              <svg width="72" height="72" viewBox="0 0 72 72">
+                <defs><linearGradient id="gr1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ff2d2d"/><stop offset="100%" stop-color="#ff6830"/></linearGradient></defs>
+                <circle class="mk-rb" cx="36" cy="36" r="30"/>
+                <circle class="mk-rf" cx="36" cy="36" r="30"/>
+              </svg>
+              <div class="mk-ring-lbl">82<div class="mk-ring-sub">/100</div></div>
+            </div>
+          </div>
         </div>
+
+        <div class="mk-kpi">
+          <div class="kpi"><div class="kpi-icon">🔥</div><div class="kpi-val">1.3k</div><div class="kpi-lab">calories</div></div>
+          <div class="kpi"><div class="kpi-icon">📅</div><div class="kpi-val">3</div><div class="kpi-lab">séances</div></div>
+          <div class="kpi"><div class="kpi-icon">⚡</div><div class="kpi-val">28</div><div class="kpi-lab">streak</div></div>
+        </div>
+
+        <div class="mk-bars">
+          <div class="mk-bar-title">Nutrition du jour</div>
+          <div class="mk-bar-row"><div class="mk-bar-head"><span>Protéines</span><span>145g / 148g</span></div><div class="mk-bar-track"><div class="mk-bar-fill bar-p" style="--w:98%"></div></div></div>
+          <div class="mk-bar-row"><div class="mk-bar-head"><span>Glucides</span><span>186g / 538g</span></div><div class="mk-bar-track"><div class="mk-bar-fill bar-g" style="--w:35%"></div></div></div>
+          <div class="mk-bar-row"><div class="mk-bar-head"><span>Lipides</span><span>21g / 82g</span></div><div class="mk-bar-track"><div class="mk-bar-fill bar-l" style="--w:26%"></div></div></div>
+        </div>
+
+        <div class="mk-session">
+          <div class="mk-sess-label">Prochain entraînement</div>
+          <div class="mk-sess-name">Upper Body</div>
+          <div class="mk-sess-ex">
+            <div class="mk-sess-done">Développé couché · 3×10 · 28kg</div>
+            <div class="mk-sess-done">Écarté incliné · 3×10 · 14kg</div>
+            <div class="mk-sess-next">Tirage vertical · 3×10 · 40kg</div>
+            <div class="mk-sess-todo">Rowing barre · 3×10</div>
+          </div>
+          <div class="mk-sess-btn">▶ Commencer la séance</div>
+        </div>
+
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- Before/After card -->
-    <div class="ba-card reveal">
-      <div class="ba-header">LA DIFFÉRENCE</div>
-      <div class="ba-cols">
-        <div class="ba-col ba-col-b">
-          <div class="ba-col-label" style="color:var(--muted)">
-            <div class="ba-col-dot" style="background:var(--muted)"></div>Avant
-          </div>
-          <ul class="ba-list before">
-            <li>Sans plan précis</li>
-            <li>Manger au hasard</li>
-            <li>Pas de résultats</li>
-            <li>Se décourager</li>
-            <li>Aucun suivi</li>
-            <li>Devinettes sur les charges</li>
-          </ul>
+<!-- WHY -->
+<section class="sec">
+  <div class="sec-inner">
+    <div class="sec-kicker">Pourquoi EVRYØNE</div>
+    <h2 class="sec-h rv">Pas une app.<br><em>Un système.</em></h2>
+
+    <div class="why-grid">
+      <div class="why-card"><div class="why-num">01</div><div class="why-title">Tout est connecté</div><div class="why-desc">Pas 5 apps différentes. <em>Un seul système</em> où entraînement, nutrition, récup et progression se parlent en temps réel.</div></div>
+      <div class="why-card"><div class="why-num">02</div><div class="why-title">Mesure la discipline, pas les actions</div><div class="why-desc">Le score quotidien transforme chaque journée en donnée. Tu vois <em>ton niveau réel</em> — pas ce que tu veux croire.</div></div>
+      <div class="why-card"><div class="why-num">03</div><div class="why-title">On te guide, on ne te track pas</div><div class="why-desc">EVRYØNE analyse, suggère, adapte. <em>Un coach</em> dans ta poche — pas un tableau Excel.</div></div>
+      <div class="why-card"><div class="why-num">04</div><div class="why-title">Crée un système, pas une routine</div><div class="why-desc">Une routine, ça casse. <em>Un système, ça tient.</em> EVRYØNE rend la discipline automatique.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON FREE vs PREMIUM -->
+<section class="sec sec-alt">
+  <div class="sec-inner">
+    <div class="sec-kicker">Comparatif</div>
+    <h2 class="sec-h rv">Free vs<br><em>Premium.</em></h2>
+    <p class="sec-sub rv">Tu peux commencer gratuitement. Mais le vrai système se débloque en Premium.</p>
+
+    <div class="comp-table rv">
+      <div class="comp-head">
+        <div>Fonctionnalité</div>
+        <div>Free</div>
+        <div class="col-pre">Premium</div>
+      </div>
+      <div class="comp-row"><div>Score quotidien /100</div><div><span class="comp-yes">✓</span></div><div><span class="comp-yes">✓</span></div></div>
+      <div class="comp-row"><div>Suivi entraînement</div><div><span class="comp-limit">Basique</span></div><div><span class="comp-yes">✓ Avancé</span></div></div>
+      <div class="comp-row"><div>Routines personnalisées</div><div><span class="comp-limit">3 max</span></div><div><span class="comp-yes">✓ Illimité</span></div></div>
+      <div class="comp-row"><div>Nutrition + macros</div><div><span class="comp-yes">✓</span></div><div><span class="comp-yes">✓</span></div></div>
+      <div class="comp-row"><div>28 micronutriments</div><div><span class="comp-no">—</span></div><div><span class="comp-yes">✓</span></div></div>
+      <div class="comp-row"><div>Programme adapté à ton objectif</div><div><span class="comp-no">—</span></div><div><span class="comp-yes">✓</span></div></div>
+      <div class="comp-row"><div>Récupération & fatigue</div><div><span class="comp-no">—</span></div><div><span class="comp-yes">✓</span></div></div>
+      <div class="comp-row"><div>Détection de plateau</div><div><span class="comp-no">—</span></div><div><span class="comp-yes">✓</span></div></div>
+      <div class="comp-row"><div>Coach IA illimité</div><div><span class="comp-no">—</span></div><div><span class="comp-yes">✓</span></div></div>
+      <div class="comp-row"><div>Stats & analyses avancées</div><div><span class="comp-no">—</span></div><div><span class="comp-yes">✓</span></div></div>
+      <div class="comp-cta">Premium · <strong>6,67€/mois</strong> · annulable en 1 clic</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec">
+  <div class="sec-inner">
+    <div class="sec-kicker">Ils ont essayé</div>
+    <h2 class="sec-h rv">Ce que disent<br><em>nos premiers users.</em></h2>
+
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="test-tag">+ 24 jours</div>
+        <p class="test-quote">Le score quotidien a tout changé. Je ne peux plus me mentir sur mes journées molles.</p>
+        <div class="test-foot">
+          <div class="test-avatar">T</div>
+          <div class="test-info"><div class="test-name">Thomas L.</div><div class="test-meta">28 ans · Paris</div></div>
+          <div class="test-stars">★★★★★</div>
         </div>
-        <div class="ba-col">
-          <div class="ba-col-label" style="color:var(--red)">
-            <div class="ba-col-dot" style="background:var(--red)"></div>Après
-          </div>
-          <ul class="ba-list after">
-            <li>Programme taillé pour toi</li>
-            <li>Nutrition maîtrisée</li>
-            <li>Progression visible</li>
-            <li>Motivation réelle</li>
-            <li>Données suivies</li>
-            <li>Charges calculées</li>
-          </ul>
+      </div>
+
+      <div class="test-card">
+        <div class="test-tag">+ 6 sem.</div>
+        <p class="test-quote">J'ai testé 4 apps avant. EVRYØNE est la seule qui connecte vraiment training, nutrition et récup.</p>
+        <div class="test-foot">
+          <div class="test-avatar">S</div>
+          <div class="test-info"><div class="test-name">Sarah M.</div><div class="test-meta">32 ans · Lyon</div></div>
+          <div class="test-stars">★★★★★</div>
+        </div>
+      </div>
+
+      <div class="test-card">
+        <div class="test-tag">+ 3 mois</div>
+        <p class="test-quote">Mon coach IA me corrige en temps réel. C'est comme avoir un préparateur sportif dans la poche.</p>
+        <div class="test-foot">
+          <div class="test-avatar">K</div>
+          <div class="test-info"><div class="test-name">Karim B.</div><div class="test-meta">35 ans · Marseille</div></div>
+          <div class="test-stars">★★★★★</div>
+        </div>
+      </div>
+
+      <div class="test-card">
+        <div class="test-tag">+ 2 mois</div>
+        <p class="test-quote">Premier mois : -3kg, +4kg sur le développé couché, 0 jour raté. La discipline devient mesurable.</p>
+        <div class="test-foot">
+          <div class="test-avatar">A</div>
+          <div class="test-info"><div class="test-name">Alex R.</div><div class="test-meta">26 ans · Bordeaux</div></div>
+          <div class="test-stars">★★★★★</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section" id="cta">
-  <div class="cta-glow-top"></div>
-  <div class="cta-box">
-    <div class="cta-eyebrow reveal">Prêt à changer ?</div>
-    <h2 class="cta-title reveal">
-      COMMENCE
-      <span>MAINTENANT.</span>
-    </h2>
-    <p class="cta-desc reveal">Rejoins le programme. Reçois ton plan personnalisé. Commence à progresser dès cette semaine.</p>
-    <div class="cta-actions reveal">
-      <a href="https://coach.evryoneclub.com" class="btn-primary">
-        Parler à mon coach
-        <div class="btn-primary-arrow">→</div>
-      </a>
+<!-- IMPACT -->
+<section class="impact-sec">
+  <div class="sec-inner">
+    <div class="sec-kicker">L'impact</div>
+    <div class="impact-lines">
+      <div class="impact-line">Tu ne peux plus <em>te mentir.</em></div>
+      <div class="impact-line">Tu vois ton <em>niveau réel.</em></div>
+      <div class="impact-line">Chaque jour.</div>
     </div>
-    <p class="cta-note reveal reveal-delay-2">Plan entraînement + nutrition · Suivi complet · Accès au tracker</p>
+    <div class="impact-divider">
+      <div class="impact-claim">Ce n'est pas une app.<br><span>C'est ton standard.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-sec" id="pricing">
+  <div class="sec-inner">
+    <div class="sec-kicker">Accès complet</div>
+    <h2 class="sec-h rv">Rejoins ceux qui<br><em>prennent le contrôle.</em></h2>
+
+    <div class="price-card">
+      <div class="price-badge">✦ Accès Premium</div>
+      <div class="price-main">6,67€<span> /mois</span></div>
+      <div class="price-period">facturé <strong>79,99€/an</strong> · économie 33%</div>
+
+      <div class="price-features">
+        <div class="pf"><div class="pf-check">✓</div>Score quotidien /100</div>
+        <div class="pf"><div class="pf-check">✓</div>Programmes training personnalisés</div>
+        <div class="pf"><div class="pf-check">✓</div>Nutrition + 28 micronutriments</div>
+        <div class="pf"><div class="pf-check">✓</div>Analyse avancée & détection plateau</div>
+        <div class="pf"><div class="pf-check">✓</div>Récupération optimisée</div>
+        <div class="pf"><div class="pf-check">✓</div>Coach IA illimité</div>
+        <div class="pf"><div class="pf-check">✓</div>Annulable à tout moment</div>
+      </div>
+
+      <a href="https://app.evryoneclub.com" class="price-btn">Commencer maintenant →</a>
+      <div class="price-note">Garantie 14 jours · Annulable en 1 clic · Aucun engagement</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec sec-alt">
+  <div class="sec-inner">
+    <div class="sec-kicker">Questions</div>
+    <h2 class="sec-h rv">À savoir<br><em>avant de commencer.</em></h2>
+
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Puis-je annuler à tout moment ?<span class="faq-icon">+</span></button><div class="faq-a"><p>Oui. Tu peux annuler ton abonnement en 1 clic depuis ton compte. Pas d'engagement, pas de questions.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Comment fonctionne le score quotidien ?<span class="faq-icon">+</span></button><div class="faq-a"><p>Chaque jour, EVRYØNE calcule un score /100 basé sur 4 piliers : entraînement (30 pts), nutrition (30 pts), récupération (20 pts), régularité (20 pts). Tu vois ton niveau réel — pas un ressenti.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Y a-t-il une garantie ?<span class="faq-icon">+</span></button><div class="faq-a"><p>Oui, 14 jours satisfait ou remboursé. Si EVRYØNE ne te convient pas, tu écris à support@evryoneclub.com et on te rembourse.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">L'app est-elle disponible sur iPhone/Android ?<span class="faq-icon">+</span></button><div class="faq-a"><p>EVRYØNE fonctionne directement dans ton navigateur (web app installable comme une vraie app sur iOS et Android). Aucun téléchargement nécessaire — tu y accèdes depuis n'importe quel appareil.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Pour qui c'est fait ?<span class="faq-icon">+</span></button><div class="faq-a"><p>Pour toute personne qui veut transformer sa discipline en résultats mesurables. Débutant motivé, intermédiaire en quête de structure, avancé qui veut optimiser — EVRYØNE s'adapte à ton niveau.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Mes données sont-elles sécurisées ?<span class="faq-icon">+</span></button><div class="faq-a"><p>Oui. Tes données sont chiffrées, stockées sur des serveurs européens conformes RGPD. Tu peux les exporter ou les supprimer à tout moment.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-sec">
+  <div class="cta-inner">
+    <div class="cta-wm">EVRYØNE</div>
+    <h2 class="cta-h">Prends<em>le contrôle.</em></h2>
+    <p class="cta-sub">Rejoins ceux qui mesurent leur discipline. Qui voient leur niveau réel. <strong style="color:var(--white)">Chaque jour.</strong></p>
+    <a href="https://app.evryoneclub.com" class="cta-btn">Commencer maintenant →</a>
+    <div class="cta-note">6,67€/mois · Annulable à tout moment · Garantie 14 jours</div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-left">
-    <div class="logo" style="font-size:18px;letter-spacing:4px">EVRY<span style="color:var(--red)">Ø</span>NE</div>
-    <div class="footer-copy">Plan entraînement &amp; nutrition personnalisé · © 2026 EVRYØNE</div>
+  <div class="foot-logo">EVRY<em>Ø</em>NE</div>
+  <div class="foot-links">
+    <a href="https://app.evryoneclub.com">App</a>
+    <a href="#pricing">Tarifs</a>
+    <a href="https://app.evryoneclub.com/privacy">Confidentialité</a>
+    <a href="https://app.evryoneclub.com/terms">Conditions</a>
+    <a href="mailto:support@evryoneclub.com">Contact</a>
   </div>
-  <div class="footer-links">
-    <a href="#" class="footer-link">Tracker</a>
-    <a href="#" class="footer-link">Programme</a>
-    <a href="#" class="footer-link">Contact</a>
-  </div>
+  <div class="foot-text">© 2026 EVRYØNE — Le système de discipline complet</div>
 </footer>
 
 <script>
-// Scroll reveal
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+// Reveal on scroll
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})
+},{threshold:0.15});
+document.querySelectorAll('.rv,.prob-line,.pillar,.stat,.why-card,.proc-step,.impact-line,.impact-claim,.price-card,.cta-inner,.mockup-wrap,.score-big,.prob-answer,.test-card,.comp-row,.faq-item').forEach(el=>io.observe(el));
+
+// Score-focus section trigger for bars
+const focusIo=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on-sec');focusIo.unobserve(e.target)}})},{threshold:0.3});
+document.querySelectorAll('.score-focus').forEach(el=>focusIo.observe(el));
+
+// Stagger pillar reveal
+document.querySelectorAll('.pillar').forEach((p,i)=>{p.style.transitionDelay=(i*0.07)+'s'});
+document.querySelectorAll('.prob-line').forEach((p,i)=>{p.style.transitionDelay=(i*0.18)+'s'});
+document.querySelectorAll('.why-card').forEach((p,i)=>{p.style.transitionDelay=(i*0.1)+'s'});
+document.querySelectorAll('.test-card').forEach((p,i)=>{p.style.transitionDelay=(i*0.1)+'s'});
+document.querySelectorAll('.impact-line').forEach((p,i)=>{p.style.transitionDelay=(i*0.18)+'s'});
+document.querySelectorAll('.comp-row').forEach((p,i)=>{p.style.transitionDelay=(i*0.05)+'s'});
+document.querySelectorAll('.faq-item').forEach((p,i)=>{p.style.transitionDelay=(i*0.06)+'s'});
+
+// Stat counters
+const countIo=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target.querySelector('[data-count]');
+    if(!el||el.dataset.done)return;
+    el.dataset.done='1';
+    const target=parseInt(el.dataset.count,10);
+    const unit=el.querySelector('.stat-unit');
+    const unitHTML=unit?unit.outerHTML:'';
+    let cur=0;const dur=1100;const start=performance.now();
+    const tick=(now)=>{const p=Math.min(1,(now-start)/dur);cur=Math.floor(target*(1-Math.pow(1-p,3)));el.innerHTML=cur+unitHTML;if(p<1)requestAnimationFrame(tick);else el.innerHTML=target+unitHTML};
+    requestAnimationFrame(tick);
+    countIo.unobserve(e.target);
+  })
+},{threshold:0.5});
+document.querySelectorAll('.stat').forEach(s=>countIo.observe(s));
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.closest('.faq-item');
+    const open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+    if(!open)item.classList.add('open');
+    btn.setAttribute('aria-expanded',!open);
   });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+});
 </script>
+
 </body>
 </html>
